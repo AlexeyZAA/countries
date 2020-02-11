@@ -8,14 +8,14 @@ const routes = [
   {
     path: '/',
     name: 'countri',
-    component: Countri
+    component: Countri,
   },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
