@@ -1,3 +1,4 @@
+
 export default {
   state: {
     countries: [],
@@ -20,8 +21,8 @@ export default {
   },
 
   actions: {
-    GET_COUTRi: async context => {
-      context.commit('SET_COUTRi')
+    GET_COUTRi: async (context, payload) => {
+      context.commit('SET_COUTRi', payload)
     },
 
     SAVE_COUTRi: async (context, payload) => {
