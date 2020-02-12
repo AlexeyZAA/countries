@@ -1,32 +1,24 @@
-
 export default {
   state: {
     countries: [],
   },
 
   getters: {
-    COUTRi: state => {
+    COUNTRI: state => {
       return state.countries
     },
   },
 
   mutations: {
-    SET_COUTRi: (state, payload) => {
+    SET_COUNTRI: (state, payload) => {
       state.countries = payload
-    },
-
-    ADD_COUTRi: (state, payload) => {
-      state.countries.push(payload)
     },
   },
 
   actions: {
-    GET_COUTRi: async (context, payload) => {
-      context.commit('SET_COUTRi', payload)
-    },
+    SETCOUNTRI: async (context, payload) => {
+      context.commit('SET_COUNTRI', payload)
+    }
 
-    SAVE_COUTRi: async (context, payload) => {
-      context.commit('ADD_COUTRi', payload)
-    },
   },
 }
