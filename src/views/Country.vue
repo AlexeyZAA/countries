@@ -21,7 +21,7 @@
               <v-row>
                 <v-col
                   v-for="item in props.items"
-                  :key="item.сountriname"
+                  :key="item.name"
                   :cols="3"
                 >
                   <v-card class="mx-auto" max-width="80%">
@@ -123,7 +123,7 @@
                 <v-container>
                   <v-row>
                   <v-col cols="12">
-                      <v-text-field label="Наименование страны*" :value="formUpdate.countryname" required></v-text-field>
+                      <v-text-field label="Наименование страны*" v-model="formUpdate.name" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field label="Столица" v-model="formUpdate.capital" required></v-text-field>
@@ -172,10 +172,10 @@ export default {
       sortDesc: false,
       page: 1,
       itemsPerPage: 8,
-      sortBy: 'countryname',
+      sortBy: 'country',
       dialog: false,
       formUpdate: {
-        countryname: '',
+        name: '',
         capital: '',
         region: '',
         population: ''
@@ -183,22 +183,21 @@ export default {
     }
   },
   methods: {
-    showModal (countryname, capital, region, population) {
+    showModal (name, capital, region, population) {
       this.dialog = true
-      this.formUpdate.countryname = countryname
+      this.formUpdate.name = name
       this.formUpdate.capital = capital
       this.formUpdate.region = region
       this.formUpdate.population = population
       },
     saveCountryItem () {
-      this.UPDATE_COUNTRY(this.formUpdate)
+      this.$store.dispatch('UPDATECOUNTRY', this.formUpdate)
       this.formUpdate = {
-        countryname: '',
+        name: '',
         capital: '',
         region: '',
         population: ''
       }
-      alert('Сохранено')
       this.dialog = false
     },
     ...mapMutations([

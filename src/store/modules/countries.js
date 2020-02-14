@@ -15,9 +15,10 @@ export default {
     },
     UPDATE_COUNTRY: (state, payload) => {
       state.countries.find((curdata, index) => {
-        if(curdata.name == payload.countryname){
-          state.countries[index].name = 'payload.countryname' 
-          //alert(JSON.stringify(state.countries[index].name))
+        if(curdata.name == payload.name){
+          state.countries[index].capital = payload.capital
+          state.countries[index].region = payload.region
+          state.countries[index].population = payload.population
         }
       })
     }
@@ -28,7 +29,6 @@ export default {
       context.commit('SET_COUNTRY', payload)
     },
     UPDATECOUNTRY: async (context, payload) => {
-      alert(JSON.stringify(payload))
       context.commit('UPDATE_COUNTRY', payload)
     }
   }
