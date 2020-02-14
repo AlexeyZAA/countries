@@ -36,54 +36,18 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
-    <v-card>
-      <template>
-        <v-row justify="center">
-          <v-dialog v-model="dialog" persistent max-width="600px">
-            <v-card>
-              <v-card-title>
-                <span class="headline">Изменение информации о стране</span>
-              </v-card-title>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-text-field
-                        label="Наименование страны*"
-                        v-model="formUpdate.name"
-                        disabled
-                        required
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field label="Столица" v-model="formUpdate.capital" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field label="Регион" v-model="formUpdate.region" required></v-text-field>
-                    </v-col>
-                    <v-col cols="12">
-                      <v-text-field label="Население*" v-model="formUpdate.population" required></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-                <small>*поля обязательные для заполнения</small>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">Закрыть</v-btn>
-                <v-btn color="blue darken-1" text @click="saveCountryItem">Сохранить</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-row>
-      </template>
-    </v-card>
-  </v-container>
+    <Modalcountry v-model="dialog" :name="formUpdate.name" :capital="formUpdate.capital" :region="formUpdate.region" :population="formUpdate.population" />
+   </v-container>
 </template>
 
 <script>
+
+import Modalcountry from "./Modalcountry.vue"
 export default {
   name: "Countrycard",
+    components: {
+    Modalcountry
+  },
   props: ["flag", "name", "capital", "region", "population"],
   data() {
     return {
@@ -97,12 +61,12 @@ export default {
     };
   },
   methods: {
-    showModal(name, capital, region, population) {
-      this.dialog = true;
-      this.formUpdate.name = name;
-      this.formUpdate.capital = capital;
-      this.formUpdate.region = region;
-      this.formUpdate.population = population;
+    showModal(capital, region, population) {
+      this.formUpdate.name = name
+      this.formUpdate.capital = capital
+      this.formUpdate.region = region
+      this.formUpdate.population = population
+      this.dialog = true
     },
     saveCountryItem() {
       this.$store.dispatch("UPDATECOUNTRY", this.formUpdate);

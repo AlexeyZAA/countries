@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import axios from "axios";
-import Countrycard from "@/components/Countrycard.vue";
+import { mapGetters } from "vuex"
+import axios from "axios"
+import Countrycard from "@/components/Countrycard.vue"
 
 export default {
   name: "Country",
@@ -84,13 +84,12 @@ export default {
       itemsPerPageArray: [8, 12],
       sortDesc: false,
       page: 1,
-      itemsPerPage: 8,
-      sortBy: "country"
+      itemsPerPage: 8
     };
   },
   methods: {
     getCountriesApi() {
-      const patch = "https://restcountries.eu/rest/v2/regionalbloc/eu";
+      const patch = "https://restcountries.eu/rest/v2/regionalbloc/eu"
       axios
         .get(patch)
         .then(response => {
