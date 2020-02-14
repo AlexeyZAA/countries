@@ -9,8 +9,8 @@
     <v-content>
       <v-container fluid>
           <v-data-iterator
-            v-if="$store.getters.COUNTRI"
-            :items="COUNTRI"
+            v-if="$store.getters.COUNTRY"
+            :items="COUNTRY"
             :items-per-page.sync="itemsPerPage"
             :page="page"
             :sort-by="sortBy.toLowerCase()"
@@ -37,7 +37,7 @@
                       <v-spacer
                         ><div class="titlbold">{{ item.name }}</div></v-spacer
                       >
-                      <v-btn icon @click="showModal(item.name)">
+                      <v-btn icon @click="showModal(item.name, item.capital, item.region, item.population)">
                         <v-icon>mdi-pencil-box-outline</v-icon>
                       </v-btn>
                     </v-card-actions>
@@ -123,7 +123,7 @@
                 <v-container>
                   <v-row>
                   <v-col cols="12">
-                      <v-text-field label="Наименование страны*" :value="formUpdate.countriname" required></v-text-field>
+                      <v-text-field label="Наименование страны*" :value="formUpdate.countryname" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field label="Столица" v-model="formUpdate.capital" required></v-text-field>
@@ -132,7 +132,7 @@
                       <v-text-field label="Регион" v-model="formUpdate.region" required> </v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field label="Население*" v-model="formUpdate.popul" required></v-text-field>
+                      <v-text-field label="Население*" v-model="formUpdate.population" required></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -143,7 +143,7 @@
                 <v-btn color="blue darken-1" text @click="dialog = false"
                   >Закрыть</v-btn
                 >
-                <v-btn color="blue darken-1" text @click="saveCountriItem"
+                <v-btn color="blue darken-1" text @click="saveCountryItem"
                   >Сохранить</v-btn
                 >
               </v-card-actions>
@@ -159,95 +159,12 @@
 </template>
 
 <script>
-/*
-var data = [
-  {
-    сountriname: 'Favorite road trips1',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines2',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips3',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines4',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips5',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines6',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips7',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines8',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips9',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines99',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips8',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    titсountrinamele: 'Best airlines7',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    tiсountrinametle: 'Favorite road trips6',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines5',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Favorite road trips4',
-    src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-    flex: 3
-  },
-  {
-    сountriname: 'Best airlines3',
-    src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
-    flex: 3
-  }
-]
-*/
-import { mapGetters } from 'vuex'
+
+import { mapMutations, mapGetters } from 'vuex'
 import axios from 'axios'
 
 export default {
-  name: 'Countri',
+  name: 'Country',
   components: {},
   data () {
     return {
@@ -255,38 +172,44 @@ export default {
       sortDesc: false,
       page: 1,
       itemsPerPage: 8,
-      sortBy: 'countriname',
-      keys: ['Countriname', 'capital', 'region', 'population'],
+      sortBy: 'countryname',
       dialog: false,
       formUpdate: {
-        countriname: '',
+        countryname: '',
         capital: '',
         region: '',
-        popul: ''
+        population: ''
       }
     }
   },
   methods: {
-    showModal (name) {
+    showModal (countryname, capital, region, population) {
       this.dialog = true
-      this.formUpdate.countriname = name
+      this.formUpdate.countryname = countryname
+      this.formUpdate.capital = capital
+      this.formUpdate.region = region
+      this.formUpdate.population = population
       },
-    saveCountriItem () {
-      alert('Сохранено')
+    saveCountryItem () {
+      this.UPDATE_COUNTRY(this.formUpdate)
       this.formUpdate = {
-        countriname: '',
+        countryname: '',
         capital: '',
         region: '',
-        popul: ''
+        population: ''
       }
+      alert('Сохранено')
       this.dialog = false
     },
-    getParam () {
+    ...mapMutations([
+      'UPDATE_COUNTRY'
+    ]),
+    getCountriesApi () {
       const patch = 'https://restcountries.eu/rest/v2/regionalbloc/eu'
       axios
         .get(patch)
         .then(response => {
-          this.$store.dispatch('SETCOUNTRI', response.data)
+          this.$store.dispatch('SETCOUNTRY', response.data)
         })
         .catch(e => {
           console.log(e)
@@ -303,13 +226,13 @@ export default {
     }
   },
   mounted () {
-    this.getParam()
+    this.getCountriesApi()
   },
   created () {},
   computed: {
-    ...mapGetters(['COUNTRI']),
+    ...mapGetters(['COUNTRY']),
     numberOfPages () {
-      return Math.ceil(this.COUNTRI.length / this.itemsPerPage)
+      return Math.ceil(this.COUNTRY.length / this.itemsPerPage)
     },
     filteredKeys () {
       return this.keys.filter(key => key !== `Name`)

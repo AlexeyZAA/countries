@@ -1,17 +1,17 @@
 <template>
   <v-app>
     <v-content>
-      <Countri />
+      <Country />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Countri from './views/Countri'
+import Country from './views/Country'
 export default {
   name: 'App',
   components: {
-    Countri,
+    Country,
   },
 
   data: () => ({

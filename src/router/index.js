@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Countri from '../views/Countri.vue'
+import Country from '../views/Country.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'countri',
-    component: Countri,
+    name: 'country',
+    component: Country,
   },
 ]
 
