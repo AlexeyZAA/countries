@@ -123,7 +123,7 @@
                 <v-container>
                   <v-row>
                   <v-col cols="12">
-                      <v-text-field label="Наименование страны*" v-model="formUpdate.name" required></v-text-field>
+                      <v-text-field label="Наименование страны*" v-model="formUpdate.name" disabled required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field label="Столица" v-model="formUpdate.capital" required></v-text-field>
