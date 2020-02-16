@@ -12,7 +12,7 @@
         <v-spacer>
           <div class="titlbold">{{ name }}</div>
         </v-spacer>
-        <v-btn icon @click="showModal(name, capital, region, population)">
+        <v-btn icon @click="showModal">
           <v-icon>mdi-pencil-box-outline</v-icon>
         </v-btn>
       </v-card-actions>
@@ -36,50 +36,39 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
-    <Modalcountry v-model="dialog" :name="formUpdate.name" :capital="formUpdate.capital" :region="formUpdate.region" :population="formUpdate.population" />
-   </v-container>
+  </v-container>
 </template>
 
 <script>
-
-import Modalcountry from "./Modalcountry.vue"
 export default {
-  name: "Countrycard",
-    components: {
-    Modalcountry
-  },
-  props: ["flag", "name", "capital", "region", "population"],
+  name: 'Countrycard',
+  props: ['flag', 'name', 'capital', 'region', 'population', 'hide'],
   data() {
     return {
-      dialog: false,
-      formUpdate: {
-        name: "",
-        capital: "",
-        region: "",
-        population: ""
-      }
-    };
+    }
   },
   methods: {
-    showModal(capital, region, population) {
-      this.formUpdate.name = name
-      this.formUpdate.capital = capital
-      this.formUpdate.region = region
-      this.formUpdate.population = population
-      this.dialog = true
+    showModal() {
+       this.$store.dispatch('SETMODALDATA', {
+        name: this.name, 
+        capital: this.capital, 
+        region: this.region,
+        population: this.population
+        })
+      this.$store.dispatch('SETDIALOG', true)
     },
     saveCountryItem() {
-      this.$store.dispatch("UPDATECOUNTRY", this.formUpdate);
+      this.$store.dispatch('UPDATECOUNTRY', this.formUpdate)
       this.formUpdate = {
-        name: "",
-        capital: "",
-        region: "",
-        population: ""
-      };
-      this.dialog = false;
-    }
-  }
-};
+        name: '',
+        capital: '',
+        region: '',
+        population: '',
+      }
+      this.dialog = false
+    },
+  },
+}
 </script>
 
 <style scoped>

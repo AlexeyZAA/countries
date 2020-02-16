@@ -20,7 +20,14 @@
           >
             <template v-slot:default="props">
               <v-row>
-                <v-col v-for="item in props.items" :key="item.name" cols="12" sm="6" md="4" lg="3">
+                <v-col
+                  v-for="item in props.items"
+                  :key="item.name"
+                  cols="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                >
                   <Countrycard
                     :flag="item.flag"
                     :name="item.name"
@@ -52,17 +59,32 @@
                   </v-list>
                 </v-menu>
                 <v-spacer></v-spacer>
-                <span class="mr-4 grey--text">Страница {{ page }} из {{ numberOfPages }}</span>
-                <v-btn fab dark color="blue darken-3" class="mr-1" @click="formerPage">
+                <span class="mr-4 grey--text"
+                  >Страница {{ page }} из {{ numberOfPages }}</span
+                >
+                <v-btn
+                  fab
+                  dark
+                  color="blue darken-3"
+                  class="mr-1"
+                  @click="formerPage"
+                >
                   <v-icon>mdi-chevron-left</v-icon>
                 </v-btn>
-                <v-btn fab dark color="blue darken-3" class="ml-1" @click="nextPage">
+                <v-btn
+                  fab
+                  dark
+                  color="blue darken-3"
+                  class="ml-1"
+                  @click="nextPage"
+                >
                   <v-icon>mdi-chevron-right</v-icon>
                 </v-btn>
               </v-row>
             </template>
           </v-data-iterator>
         </v-container>
+        <Modalcountry :dialog="dialog" />
       </template>
     </v-content>
     <v-footer app>Тестовое задание</v-footer>
@@ -70,56 +92,64 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
-import axios from "axios"
-import Countrycard from "@/components/Countrycard.vue"
+import { mapGetters } from 'vuex'
+import axios from 'axios'
+import Countrycard from '@/components/Countrycard.vue'
+import Modalcountry from '@/components/Modalcountry.vue'
 
 export default {
-  name: "Country",
+  name: 'Country',
   components: {
-    Countrycard
+    Countrycard,
+    Modalcountry,
   },
   data() {
     return {
       itemsPerPageArray: [8, 12],
       sortDesc: false,
       page: 1,
-      itemsPerPage: 8
-    };
+      itemsPerPage: 8,
+      formUpdate: {
+        name: '',
+        capital: '',
+        region: '',
+        population: '',
+      },
+    }
   },
   methods: {
     getCountriesApi() {
-      const patch = "https://restcountries.eu/rest/v2/regionalbloc/eu"
+      const patch = 'https://restcountries.eu/rest/v2/regionalbloc/eu'
       axios
         .get(patch)
         .then(response => {
-          this.$store.dispatch("SETCOUNTRY", response.data);
+          this.$store.dispatch('SETCOUNTRY', response.data)
         })
         .catch(e => {
-          console.log(e);
-        });
+          console.log(e)
+        })
     },
     nextPage() {
-      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+      if (this.page + 1 <= this.numberOfPages) this.page += 1
     },
     formerPage() {
-      if (this.page - 1 >= 1) this.page -= 1;
+      if (this.page - 1 >= 1) this.page -= 1
     },
     updateItemsPerPage(number) {
-      this.itemsPerPage = number;
-    }
+      this.itemsPerPage = number
+    },
   },
   mounted() {
-    this.getCountriesApi();
+    this.getCountriesApi()
   },
   created() {},
   computed: {
-    ...mapGetters(["COUNTRY"]),
+    ...mapGetters(['COUNTRY']),
     numberOfPages() {
-      return Math.ceil(this.COUNTRY.length / this.itemsPerPage);
-    }
-  }
-};
+      return Math.ceil(this.COUNTRY.length / this.itemsPerPage)
+    },
+  },
+}
 </script>
 
 <style scoped>
