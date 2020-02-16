@@ -88,6 +88,7 @@
       </template>
     </v-content>
     <v-footer app>Тестовое задание</v-footer>
+    <Progress v-if="!$store.getters.COUNTRY"/>
   </v-app>
 </template>
 
@@ -96,12 +97,14 @@ import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Countrycard from '@/components/Countrycard.vue'
 import Modalcountry from '@/components/Modalcountry.vue'
+import Progress from '@/components/Progress.vue'
 
 export default {
   name: 'Country',
   components: {
     Countrycard,
     Modalcountry,
+    Progress,
   },
   data() {
     return {
