@@ -139,7 +139,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "@/styles/_app.scss";
+
 .headRight {
 	display: inline-block;
 	right: 10px;
@@ -148,6 +150,7 @@ export default {
 }
 .headLeft {
 	font-size: small;
+	color: $texthead;
 }
 .pageNav {
 	text-align: center;
