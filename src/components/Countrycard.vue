@@ -1,10 +1,9 @@
 <template>
-  <v-container class="mx-auto" max-width="80%">
-    <v-card>
+    <v-card class="mx-auto" max-width="250px">
       <v-img
         :src="flag"
-        height="160px"
-        width="100%"
+        height="150px"
+        width="250px"
       ></v-img>
       <v-card-actions>
         <v-spacer>
@@ -16,7 +15,7 @@
       </v-card-actions>
 
       <v-card-text class="text--primary">
-        <v-simple-table>
+        <v-simple-table dense>
           <tbody>
             <tr>
               <td class="titlbold">Столица</td>
@@ -34,7 +33,6 @@
         </v-simple-table>
       </v-card-text>
     </v-card>
-  </v-container>
 </template>
 
 <script>
