@@ -40,55 +40,58 @@
             </template>
             <template v-slot:footer>
               <v-row class="mt-2" align="center" justify="center">
-                <span class="grey--text">На странице</span>
-                <v-menu offset-y>
-                  <template v-slot:activator="{ on }">
-                    <v-btn dark text color="primary" class="ml-2" v-on="on">
-                      {{ itemsPerPage }}
-                      <v-icon>mdi-chevron-down</v-icon>
-                    </v-btn>
-                  </template>
-                  <v-list>
-                    <v-list-item
-                      v-for="(number, index) in itemsPerPageArray"
-                      :key="index"
-                      @click="updateItemsPerPage(number)"
-                    >
-                      <v-list-item-title>{{ number }}</v-list-item-title>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-                <v-spacer></v-spacer>
-                <span class="mr-4 grey--text"
-                  >Страница {{ page }} из {{ numberOfPages }}</span
-                >
-                <v-btn
-                  fab
-                  dark
-                  color="blue darken-3"
-                  class="mr-1"
-                  @click="formerPage"
-                >
-                  <v-icon>mdi-chevron-left</v-icon>
-                </v-btn>
-                <v-btn
-                  fab
-                  dark
-                  color="blue darken-3"
-                  class="ml-1"
-                  @click="nextPage"
-                >
-                  <v-icon>mdi-chevron-right</v-icon>
-                </v-btn>
+                <v-col cols="12" sm="6" md="6" lg="6" class="pageNav">
+                  <span class="grey--text">На странице</span>
+                  <v-menu offset-y>
+                    <template v-slot:activator="{ on }">
+                      <v-btn dark text color="primary" class="ml-2" v-on="on">
+                        {{ itemsPerPage }}
+                        <v-icon>mdi-chevron-down</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-list>
+                      <v-list-item
+                        v-for="(number, index) in itemsPerPageArray"
+                        :key="index"
+                        @click="updateItemsPerPage(number)"
+                      >
+                        <v-list-item-title>{{ number }}</v-list-item-title>
+                      </v-list-item>
+                    </v-list>
+                  </v-menu>
+                  <span class="mr-4 grey--text"
+                    >Страница {{ page }} из {{ numberOfPages }}</span
+                  >
+                </v-col>
+                <v-col cols="12" sm="6" md="6" lg="6" class="pageNav">
+                  <v-btn
+                    fab
+                    dark
+                    color="blue darken-3"
+                    class="mr-1"
+                    @click="formerPage"
+                  >
+                    <v-icon>mdi-chevron-left</v-icon>
+                  </v-btn>
+                  <v-btn
+                    fab
+                    dark
+                    color="blue darken-3"
+                    class="ml-1"
+                    @click="nextPage"
+                  >
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-col>
               </v-row>
             </template>
           </v-data-iterator>
         </v-container>
-        <Modalcountry :dialog="dialog" />
+        <Modalcountry />
       </template>
     </v-content>
     <v-footer app>Тестовое задание</v-footer>
-    <Progress v-if="!$store.getters.COUNTRY"/>
+    <Progress v-if="!$store.getters.COUNTRY" />
   </v-app>
 </template>
 
@@ -104,9 +107,9 @@ export default {
   components: {
     Countrycard,
     Modalcountry,
-    Progress,
+    Progress
   },
-  data() {
+  data () {
     return {
       itemsPerPageArray: [8, 12],
       sortDesc: false,
@@ -116,12 +119,12 @@ export default {
         name: '',
         capital: '',
         region: '',
-        population: '',
-      },
+        population: ''
+      }
     }
   },
   methods: {
-    getCountriesApi() {
+    getCountriesApi () {
       const patch = 'https://restcountries.eu/rest/v2/regionalbloc/eu'
       axios
         .get(patch)
@@ -132,26 +135,26 @@ export default {
           console.log(e)
         })
     },
-    nextPage() {
+    nextPage () {
       if (this.page + 1 <= this.numberOfPages) this.page += 1
     },
-    formerPage() {
+    formerPage () {
       if (this.page - 1 >= 1) this.page -= 1
     },
-    updateItemsPerPage(number) {
+    updateItemsPerPage (number) {
       this.itemsPerPage = number
-    },
+    }
   },
-  mounted() {
+  mounted () {
     this.getCountriesApi()
   },
-  created() {},
+  created () {},
   computed: {
     ...mapGetters(['COUNTRY']),
-    numberOfPages() {
+    numberOfPages () {
       return Math.ceil(this.COUNTRY.length / this.itemsPerPage)
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -160,5 +163,12 @@ export default {
   display: inline-block;
   right: 10px;
   position: absolute;
+  font-size: inherit;
+}
+.headLeft {
+  font-size: small;
+}
+.pageNav {
+  text-align: center;
 }
 </style>

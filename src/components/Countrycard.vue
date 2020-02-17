@@ -3,8 +3,6 @@
     <v-card>
       <v-img
         :src="flag"
-        class="white--text"
-        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
         height="160px"
         width="100%"
       ></v-img>
