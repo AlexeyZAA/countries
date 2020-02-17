@@ -10,7 +10,7 @@
 		</v-app-bar>
 		<v-content>
 			<template>
-				<v-card class="mx-auto" max-width="1100px" min-width="300" light="true">
+				<v-card class="mx-auto" max-width="1100px" min-width="300">
 					<v-container>
 						<v-data-iterator
 							v-if="$store.getters.COUNTRY"
