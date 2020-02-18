@@ -24,7 +24,7 @@
 							<v-col cols="12">
 								<ValidationProvider name="MODAL.region" rules="required">
 									<div slot-scope="{ errors }">
-										<v-text-field label="Регион" v-model="MODAL.region"></v-text-field>
+										<v-text-field label="Регион*" v-model="MODAL.region"></v-text-field>
 										<p>
 											<span class="danger">{{ errors[0] }}</span>
 										</p>
@@ -34,7 +34,7 @@
 							<v-col cols="12">
 								<ValidationProvider name="MODAL.population" rules="required">
 									<div slot-scope="{ errors }">
-										<v-text-field label="Население" v-model="MODAL.population"></v-text-field>
+										<v-text-field label="Население*" v-model="MODAL.population"></v-text-field>
 										<p>
 											<span class="danger">{{ errors[0] }}</span>
 										</p>
