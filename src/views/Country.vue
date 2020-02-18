@@ -96,12 +96,6 @@ export default {
 			sortDesc: false,
 			page: 1,
 			itemsPerPage: 8,
-			formUpdate: {
-				name: "",
-				capital: "",
-				region: "",
-				population: ""
-			}
 		};
 	},
 	methods: {
