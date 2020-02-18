@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Блок тестов Countrycard.vue Снимок краты страны 1`] = `
+<v-card max-width="250px" class="mx-auto">
+  <v-img src="http://testdomain" height="150px" width="250px"></v-img>
+  <v-card-actions>
+    <v-spacer>
+      <div class="titlbold">Текст имя</div>
+    </v-spacer>
+    <v-btn icon="">
+      <v-icon>mdi-pencil-box-outline</v-icon>
+    </v-btn>
+  </v-card-actions>
+  <v-card-text class="text--primary">
+    <v-simple-table dense="">
+      <tbody>
+        <tr>
+          <td class="titlbold">Столица</td>
+          <td>Текст столица</td>
+        </tr>
+        <tr>
+          <td class="titlbold">Регион</td>
+          <td>Текст регион</td>
+        </tr>
+        <tr>
+          <td class="titlbold">Население</td>
+          <td>Текст население</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+  </v-card-text>
+</v-card>
+`;

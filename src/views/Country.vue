@@ -146,7 +146,7 @@ export default {
 	display: inline-block;
 	right: 10px;
 	position: absolute;
-	font-size: 0.9rem;
+	font-size: 0.9em;
 }
 .headLeft {
 	font-size: small;
