@@ -7,7 +7,10 @@
       ></v-img>
       <v-card-actions>
         <v-spacer>
-          <div class="titlbold">{{ name }}</div>
+          <div class="titlbold">
+            {{ name }}
+            <router-link to="/about">О нас</router-link>
+            </div>
         </v-spacer>
         <v-btn icon @click="showModal">
           <v-icon>mdi-pencil-box-outline</v-icon>

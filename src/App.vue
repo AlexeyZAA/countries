@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-content>
-      <Country />
+      <router-view>
+        <Country />
+      </router-view>
     </v-content>
   </v-app>
 </template>
